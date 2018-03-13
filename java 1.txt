@@ -1,0 +1,146 @@
+'''
+BookMyMovie is an online website, through which the required number of tickets can be booked for a particular show. 
+A maximum number of 15 tickets can be issued per booking.
+
+BookMyMovie
+--------------------
+-movieId: int 
+-noOfTicket: int 
+-discount: double 
+-totalAmount: double 
+----------------------
+all getters and setters
++calculateTicketAmount(): double
++calculateDiscount():double
+-------------------------------
+
+Method Description: 
+
+BookMyMovie(int movieId, int noOfTickets): This constructor is used to initialize the instance variables with user provided values.
+
+calculateDiscount(): This method is used to set the discount percentage for a particular booking based on the noOfTickets issued and the movieId. 
+The condition for calculating the discount is given below:
+
+movieId 	noOfTickets	Value
+--------	--------	-------
+101,102,103	<5		0
+101 or 103	>=5&<10		15
+101 or 103	>=10&<=15	20	
+102		>=5&<10		10
+102		>=10&<=15	15
+
+calculateTicketAmount(): This method is used to calculate the ticket amount after deducting the discount amount. 
+It should call the method calculateDiscount() which sets the discount percentage. 
+Then the totalAmount should be calculated using the formula given below:
+
+totalAmount = baseFare * noOfTickets – (baseFare * noOftickets * (discount/100))
+
+
+The baseFare for a given movieId is given below:
+movieId 	basefare
+--------	--------
+101		120
+102		170
+103		150
+
+
+'''
+
+public class BookMyMovie {
+	private int movieId;
+	private int noOfTicket;
+	private double discount;
+	private double totalAmount;
+	
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
+
+	public int getNoOfTicket() {
+		return noOfTicket;
+	}
+
+	public void setNoOfTicket(int noOfTicket) {
+		this.noOfTicket = noOfTicket;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public BookMyMovie(int movieId, int noOfTicket){
+		this.movieId=movieId;
+		this.noOfTicket=noOfTicket;	
+	}
+	
+	public void calculateDiscount(){
+		if((this.movieId==101 || this.movieId==102 || this.movieId==103) && this.noOfTicket<5){
+			this.setDiscount(0);
+		}
+		if((this.movieId==101 || this.movieId==103) && (this.noOfTicket>=5 && this.noOfTicket<10)){
+			this.setDiscount(15);
+		}
+		if((this.movieId==101 || this.movieId==103) && (this.noOfTicket>=10 && this.noOfTicket<=15)){
+			this.setDiscount(20);
+		}
+		if(this.movieId==102 && (this.noOfTicket>=5 && this.noOfTicket<10)){
+			this.setDiscount(10);
+		}
+		
+		if(this.movieId==102 && (this.noOfTicket>=10 && this.noOfTicket<=15)){
+			this.setDiscount(15);
+		}
+			
+		
+	}
+	public double calculateTicketAmount(){
+		int baseFare=0;
+		switch(this.movieId){
+		case 101: baseFare=120;
+				  break;
+		case 102: baseFare=170;
+				  break;
+		case 103: baseFare=150;
+				break;
+		default: baseFare=0;
+				System.out.println("Sorry! Invalid movie Id!");
+	
+		}
+		calculateDiscount();
+		
+		totalAmount=baseFare*noOfTicket-(baseFare*noOfTicket*(discount/100));
+		return totalAmount;
+	
+	}
+}
+
+public class BookingTester {
+	public static void main(String[] args) {
+		BookMyMovie booking1 = new BookMyMovie(101,5);
+		System.out.println("Total booking amount: "+booking1.calculateTicketAmount());
+		
+		BookMyMovie booking4 = new BookMyMovie(104,8);
+		System.out.println("Total booking amount: "+booking4.calculateTicketAmount());
+		
+	}
+
+}
+
+
+ 
