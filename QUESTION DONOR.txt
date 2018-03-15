@@ -1,0 +1,44 @@
+'''
+A Donor wants to register himself for a blood donation camp conducted by an NGO. 
+The NGO needs to validate the donor details before registration. Create a Donor class and validator class.
+
+Method description:
+
+donorValidator(Donor donor)
+
+	This method is used to validate all the donor details(emailId, lastDateOfDonation and phoneNo) by invoking the respective methods
+
+	It should return an error message code, based upon the violation, as per the table shown below
+
+	In case of no violation, it should return "success"
+
+isValidEmailId(String emailId)
+
+	This method is used to validate the email of the donor
+
+	Email entered by the donor should contain at least one uppercase, one lowercase, one number
+
+	Email can have only one ‘@’ and can have any number of ‘.’ but there should be at least one dot after ‘@’
+
+	If email doesn’t follow any of above rules, this method should return false else return true
+
+isValidDateOfDonation(Calendar lastDateOfDonation)
+
+	This method is used to check that the donor should not have donated blood in past 6 months
+
+	The lastDateOfDonation should be atleast 6 months before today's date
+
+	If lastDateOfDonation doesn’t follow any of above rules, this method should return false else return true
+
+isValidPhoneNo(Long phoneNo)
+
+	This method is used to validate the phoneNo of the donor
+
+	phoneNo should be of 10 digits
+
+	All the digits of phoneNo should not be same
+
+	If phoneNo doesn’t follow any of above rules, this method should return false else return true
+
+Create a UserInterface class and verify the above functionality for the following sample inputs. 
+Also, accordingly check the message code received from the validator and display user friendly messages as expected in the below samples. 
